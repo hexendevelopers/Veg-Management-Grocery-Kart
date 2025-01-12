@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulk Product Upload</title>
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Title Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">
+                Bulk Product Upload
+            </h1>
+            <p class="text-lg text-gray-600">
+                Upload multiple products at once
+            </p>
+        </div>
+
+        <!-- Product Upload Form -->
+        <form id="bulkUploadForm" class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Product 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 1</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product1-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product1-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product1-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 2</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product2-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product2-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product2-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 3</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product3-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product3-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product3-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 4</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product4-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product4-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product4-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 5</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product5-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product5-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product5-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 6</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product6-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product6-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product6-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 7</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product7-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product7-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product7-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 8</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product8-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product8-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product8-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 9</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product9-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product9-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product9-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-4">Product 10</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Name</label>
+                            <input type="text" name="product10-name" 
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Quantity</label>
+                            <input type="text" name="product10-quantity" placeholder="e.g., 1 kg, 500g, 2 pieces"
+                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2">Product Image</label>
+                            <input type="file" name="product10-image" accept="image/*, .svg, .webp"
+                                   class="w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end">
+                <button type="submit" 
+                        class="bg-green-500 text-white px-8 py-3 rounded-lg hover:bg-green-600 transition-colors">
+                    Upload All Products
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGm1mZObECZzi8r1MA7gamJW_v_7v0tZw",
+            authDomain: "substitution-form-shopify-app.firebaseapp.com",
+            databaseURL: "https://substitution-form-shopify-app-default-rtdb.firebaseio.com",
+            projectId: "substitution-form-shopify-app",
+            storageBucket: "substitution-form-shopify-app.firebasestorage.app",
+            messagingSenderId: "857195381141",
+            appId: "1:857195381141:web:310d7854d9db510486369c"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const storage = firebase.storage();
+
+        document.getElementById('bulkUploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            try {
+                const products = [];
+                let hasErrors = false;
+
+                // Process each product
+                for (let i = 1; i <= 10; i++) {
+                    const name = document.querySelector(`[name="product${i}-name"]`).value.trim();
+                    const quantity = document.querySelector(`[name="product${i}-quantity"]`).value.trim();
+                    const imageFile = document.querySelector(`[name="product${i}-image"]`).files[0];
+
+                    // Skip empty entries
+                    if (!name && !quantity && !imageFile) continue;
+
+                    // Validate required fields
+                    if (!name || !quantity || !imageFile) {
+                        alert(`Please fill all fields for Product ${i}`);
+                        hasErrors = true;
+                        break;
+                    }
+
+                    products.push({
+                        name,
+                        quantity,
+                        imageFile
+                    });
+                }
+
+                if (hasErrors || products.length === 0) {
+                    if (products.length === 0) alert('Please fill in at least one product');
+                    return;
+                }
+
+                // Show loading message
+                alert('Uploading products... Please wait.');
+
+                // Upload each product
+                for (const product of products) {
+                    // Upload image first
+                    const imageRef = storage.ref(`product-images/${Date.now()}_${product.imageFile.name}`);
+                    const snapshot = await imageRef.put(product.imageFile);
+                    const imageUrl = await snapshot.ref.getDownloadURL();
+
+                    // Save product data
+                    const productData = {
+                        name: product.name,
+                        quantity: product.quantity,
+                        imageUrl: imageUrl
+                    };
+
+                    await database.ref('products').push(productData);
+                }
+
+                // Show success message
+                alert('All products uploaded successfully!');
+                
+                // Reset form
+                e.target.reset();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error uploading products. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

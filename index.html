@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Produce Boxes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+</head>
+<body class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+        <!-- Title Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">
+                Fresh Produce Boxes
+            </h1>
+            <p class="text-lg text-gray-600">
+                Select your Box
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex justify-end space-x-4 mb-6">
+            <button onclick="window.location.href='Allproducts.html'" 
+                    class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                All Products
+            </button>
+            <button onclick="openModal()" 
+                    class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                Add Products
+            </button>
+        </div>
+
+        <!-- Buttons Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Box options remain the same -->
+            <button onclick="handleBoxSelect('Small Box (Mixed)')" 
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-green-200 hover:border-green-400">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Small Box (Mixed)</h2>
+                <p class="text-gray-600">Perfect for individuals or couples</p>
+            </button>
+
+            <button onclick="handleBoxSelect('Medium Box (Mixed)')" 
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-green-200 hover:border-green-400">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Medium Box (Mixed)</h2>
+                <p class="text-gray-600">Ideal for small families</p>
+            </button>
+
+            <button onclick="handleBoxSelect('Large Box (Mixed)')" 
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-green-200 hover:border-green-400">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Large Box (Mixed)</h2>
+                <p class="text-gray-600">Great for larger families</p>
+            </button>
+
+            <button onclick="handleBoxSelect('All Veggie Box')" 
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-green-200 hover:border-green-400">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">All Veggie Box</h2>
+                <p class="text-gray-600">100% vegetable selection</p>
+            </button>
+
+            <button onclick="handleBoxSelect('Fruits Box')" 
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border-2 border-green-200 hover:border-green-400">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Fruits Box</h2>
+                <p class="text-gray-600">100% Fruits Box selection</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="addProductModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-4">Add New Product</h2>
+            
+            <form id="addProductForm" class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 mb-2">Product Name</label>
+                    <input type="text" id="productName" required
+                           class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-green-500">
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 mb-2">Product Image</label>
+                    <div class="flex items-center space-x-4">
+                        <input type="file" 
+                               id="productImage" 
+                               accept="image/*, .svg, .webp" 
+                               onchange="handleImagePreview(event)"
+                               style="opacity: 0; position: absolute; z-index: -1;">
+                        <div id="dragDropZone" 
+                             class="w-full border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-green-500 transition-colors">
+                            <label for="productImage" class="cursor-pointer">
+                                <div class="text-gray-600">
+                                    <p>Drag and drop your image here</p>
+                                    <p>or</p>
+                                    <p class="text-green-500">Click to browse</p>
+                                </div>
+                            </label>
+                        </div>
+                        <div id="imagePreview" class="hidden">
+                            <img id="previewImg" class="h-20 w-20 object-cover rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="closeModal()" 
+                            class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" 
+                            class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAGm1mZObECZzi8r1MA7gamJW_v_7v0tZw",
+            authDomain: "substitution-form-shopify-app.firebaseapp.com",
+            databaseURL: "https://substitution-form-shopify-app-default-rtdb.firebaseio.com",
+            projectId: "substitution-form-shopify-app",
+            storageBucket: "substitution-form-shopify-app.firebasestorage.app",
+            messagingSenderId: "857195381141",
+            appId: "1:857195381141:web:310d7854d9db510486369c"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const storage = firebase.storage();
+
+        // Image Preview Function
+        function handleImagePreview(event) {
+            const file = event.target.files[0];
+            handleImageFile(file);
+        }
+
+        function handleImageFile(file) {
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'];
+            const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.svg', '.webp'];
+            
+            if (!file) {
+                alert('Please select an image file');
+                return false;
+            }
+            
+            const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+            if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
+                alert('Please select a valid image file (JPEG, PNG, GIF, SVG, or WebP)');
+                return false;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImg').src = e.target.result;
+                document.getElementById('imagePreview').classList.remove('hidden');
+                document.getElementById('dragDropZone').classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+            return true;
+        }
+
+        // Drag and Drop handlers
+        const dragDropZone = document.getElementById('dragDropZone');
+
+        dragDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dragDropZone.classList.add('border-green-500');
+        });
+
+        dragDropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dragDropZone.classList.remove('border-green-500');
+        });
+
+        dragDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dragDropZone.classList.remove('border-green-500');
+            const file = e.dataTransfer.files[0];
+            handleImageFile(file);
+        });
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('addProductModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('addProductModal').classList.add('hidden');
+            document.getElementById('addProductForm').reset();
+            document.getElementById('imagePreview').classList.add('hidden');
+            document.getElementById('dragDropZone').classList.remove('hidden');
+            document.getElementById('productImage').value = '';
+        }
+
+        // Form Submission
+        document.getElementById('addProductForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const productName = document.getElementById('productName').value;
+            const imageInput = document.getElementById('productImage');
+            const imageFile = imageInput.files[0];
+
+            if (!productName.trim() || !imageFile) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            try {
+                const imageRef = storage.ref(`product-images/${Date.now()}_${imageFile.name}`);
+                const snapshot = await imageRef.put(imageFile);
+                const imageUrl = await snapshot.ref.getDownloadURL();
+
+                const productData = {
+                    name: productName,
+                    imageUrl: imageUrl,
+                    fileType: imageFile.type,
+                    uploadedAt: firebase.database.ServerValue.TIMESTAMP
+                };
+
+                await database.ref('products').push(productData);
+                alert('Product added successfully!');
+                closeModal();
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error adding product. Please try again.');
+            }
+        });
+
+        // Box Selection Handler
+        function handleBoxSelect(boxType) {
+            switch(boxType) {
+                case 'Small Box (Mixed)':
+                    window.location.href = 'Smallbox.html';
+                    break;
+                case 'Medium Box (Mixed)':
+                    window.location.href = 'Mediumbox.html';
+                    break;
+                case 'Large Box (Mixed)':
+                    window.location.href = 'Largebox.html';
+                    break;
+                case 'All Veggie Box':
+                    window.location.href = 'Veggiebox.html';
+                    break;
+                case 'Fruits Box':
+                    window.location.href = 'Fruitbox.html';
+                    break;
+                default:
+                    alert('Invalid selection');
+            }
+        }
+    </script>
+    
+    <!-- Hexen Development Credit -->
+    <div class="text-center mt-8 text-gray-600">
+        <p>Developed By <a href="#"  class="text-blue-600 hover:text-blue-800">Hexen</a></p>
+    </div>
+
+    
+</body>
+</html>
